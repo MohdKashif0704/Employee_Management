@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Employee</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Update Employee</h1>
+    <form th:action="@{/updateEmp/{id}(id=${employee.id})}" th:object="${employee}" method="post">
+        <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control mb-3" /><br>
+        <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control mb-3" /><br>
+        <input type="text" th:field="*{email}" placeholder="Email Address" class="form-control mb-3" /><br>
+        <input type="submit" value="Update" class="btn btn-primary" />
+    </form>
+</div>
+</body>
+</html>

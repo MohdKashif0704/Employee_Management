@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Management</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div align="center" class="container">
+    <h1>Employee List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee FirstName</th>
+                <th>Employee LastName</th>
+                <th>Employee Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employeeList}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td><a th:href="@{/updateEmp/{id}(id=${employee.id})}" class="btn btn-primary">Update</a></td>
+                <td><a th:href="@{/deleteById/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+       <ul class="pagination">
+    <li th:class="${currentPage == 1} ? 'disabled'">
+        <a th:href="@{/page/{pageNo}(pageNo=${currentPage - 1})}">&laquo;</a>
+    </li>
+
+    <li th:each="i : ${#numbers.sequence(1, totalPages)}"
+        th:class="${i == currentPage} ? 'active'">
+        <a th:href="@{/page/{pageNo}(pageNo=${i})}" th:text="${i}"></a>
+    </li>
+
+    <li th:class="${currentPage == totalPages} ? 'disabled'">
+        <a th:href="@{/page/{pageNo}(pageNo=${currentPage + 1})}">&raquo;</a>
+    </li>
+</ul>
+
+    </div>
+
+    <a th:href="@{/sendForm}" class="btn btn-success">Add Employee</a>
+</div>
+</body>
+</html>
